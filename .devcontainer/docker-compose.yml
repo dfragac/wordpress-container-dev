@@ -1,0 +1,55 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    # Documentation: https://github.com/dinhtungdu/wordpress-codespace (based on WordPress official image)
+    # image: dinhtungdu/wordpress-codespace
+    build: .
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - ${WORDPRESS_WWW_PORT}:80
+    env_file:
+      - .env
+      - ./config/wp-config-extra.env
+    environment:
+      WORDPRESS_DB_HOST: database
+    volumes:
+      - ./config/php-custom.ini:/usr/local/etc/php/conf.d/99-php-custom.ini # Personalize PHP configuration and params
+      - ./config/php-xdebug.ini:/usr/local/etc/php/conf.d/99-php-xdebug.ini # Personalize Xdebug configuration and params
+      - wordpress:/var/www/html # Is it possible to moun root folder to work in a "full wordpress" installation
+      - ..:/var/www/html${WORDPRESS_DEV_ITEM_PATH} # Mount working dir
+
+  database:
+    # Documentation (Bakups, dumps...): https://hub.docker.com/_/mariadb
+    image: mariadb:10.4
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+
+  #
+  # Tooling.
+  #
+
+  phpmyadmin:
+      image: phpmyadmin:latest
+      restart: always
+      depends_on:
+        - database
+      ports:
+        - ${WORDPRESS_DB_PMA_PORT}:80
+      environment:
+        - PMA_ARBITRARY=1
+
+volumes:
+  wordpress:
+  database:

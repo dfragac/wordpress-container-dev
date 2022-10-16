@@ -1,0 +1,2 @@
+# Ignore logs on .devcontainer folder
+.devcontainer/*/*.log
