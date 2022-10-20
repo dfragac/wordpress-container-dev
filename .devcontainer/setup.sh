@@ -23,7 +23,7 @@ sed -i 's|__WORDPRESS_DEV_ITEM_PATH__|'"$WORDPRESS_DEV_ITEM_PATH"'|' "$SETUP_PAT
 # PHP Tooling - WordPress Coding Standards
 echo "Installing WordPress Coding Standards..."
 git clone -b master https://github.com/WordPress/WordPress-Coding-Standards.git /var/www/.wpcs
-phpcs --config-set installed_paths /var/www/.wpcs/
+sudo phpcs --config-set installed_paths /var/www/.wpcs/
 
 # NodeJS Tooling - Install dependencies and other stuff for blocks if using wp-scripts
 # echo "Installing NodeJS dependencies.."
