@@ -32,6 +32,10 @@ git clone -b master https://github.com/WordPress/WordPress-Coding-Standards.git 
 sudo phpcs --config-set installed_paths /var/www/.wpcs/
 sudo phpcs --config-set default_standard WordPress
 
+# Wait to DB to be ready (maybe it's not needed but just to be sure).
+echo "Waiting for DB image to be ready..."
+sleep 5s
+
 # WordPress - Setting title
 if [[ -z "$WORDPRESS_WWW_TITLE" ]]
 then
