@@ -28,7 +28,7 @@ sudo phpcs --config-set default_standard WordPress
 echo "Waiting for DB image to be ready..."
 sleep 5s
 
-# Determine environment (local/codespace)
+# WordPress - Determine environment (local/codespace)
 if [[ "$CODESPACES" ]]
 then
 	WORDPRESS_SITE_HOST="https://${CODESPACE_NAME}-${WORDPRESS_WWW_PORT}.githubpreview.dev"
