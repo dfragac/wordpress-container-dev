@@ -9,14 +9,6 @@ exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>"$SETUP_PATH"/logs/setup.log 2>&1
 
-# Determine environment (local/codespace)
-if [[ "$CODESPACES" ]]
-then
-	SITE_HOST="https://${CODESPACE_NAME}-${WORDPRESS_WWW_PORT}.githubpreview.dev"
-else
-	SITE_HOST="http://localhost:${WORDPRESS_WWW_PORT}"
-fi
-
 # Visual Studio Code - Readjust launch.json based on .env property
 sed -i 's|__WORDPRESS_DEV_ITEM_PATH__|'"$WORDPRESS_DEV_ITEM_PATH"'|' "$SETUP_PATH"/../.vscode/launch.json
 
@@ -36,6 +28,14 @@ sudo phpcs --config-set default_standard WordPress
 echo "Waiting for DB image to be ready..."
 sleep 5s
 
+# Determine environment (local/codespace)
+if [[ "$CODESPACES" ]]
+then
+	WORDPRESS_SITE_HOST="https://${CODESPACE_NAME}-${WORDPRESS_WWW_PORT}.githubpreview.dev"
+else
+	WORDPRESS_SITE_HOST="http://localhost:${WORDPRESS_WWW_PORT}"
+fi
+
 # WordPress - Setting title
 if [[ -z "$WORDPRESS_WWW_TITLE" ]]
 then
@@ -46,10 +46,10 @@ fi
 echo "Starting WordPress project '$WORDPRESS_WWW_TITLE' in '/var/www/html'..."
 cd /var/www/html/
 
-echo "Setting up WordPress at $SITE_HOST"
+echo "Setting up WordPress at $WORDPRESS_SITE_HOST"
 wp core install \
-    --url="$SITE_HOST" \
-    --title="$TITLE" \
+    --url="$WORDPRESS_SITE_HOST" \
+    --title="$WORDPRESS_WWW_TITLE" \
     --admin_user="$WORDPRESS_WWW_ROOT_USER" \
     --admin_password="$WORDPRESS_WWW_ROOT_PASSWORD" \
     --admin_email="$WORDPRESS_WWW_ROOT_EMAIL" \

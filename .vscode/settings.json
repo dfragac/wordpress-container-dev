@@ -17,7 +17,7 @@
         "editor.defaultFormatter": "wongjn.php-sniffer"
     },
     "phpSniffer.autoDetect": true,
-    "phpSniffer.run": "onSave"
+    "phpSniffer.run": "onSave",
     // PHPCS.
     "phpcs.enable": true,
     "phpcs.executablePath": "/usr/local/bin/phpcs",
