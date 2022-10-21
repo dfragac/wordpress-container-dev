@@ -1,5 +1,24 @@
 {
-    // PHPCS
+    // Live Sass compiler.
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "compressed",
+            "extensionName": ".css",
+            "savePath": "/assets/css"
+        }
+    ],
+    "liveSassCompile.settings.generateMap": true,
+    "liveSassCompile.settings.autoprefix": [
+        "> 1%",
+        "last 2 versions"
+    ],
+    // PHP Sniffer by wongjn
+    "[php]": {
+        "editor.defaultFormatter": "wongjn.php-sniffer"
+    },
+    "phpSniffer.autoDetect": true,
+    "phpSniffer.run": "onSave"
+    // PHPCS.
     "phpcs.enable": true,
     "phpcs.executablePath": "/usr/local/bin/phpcs",
     "phpcs.standard": "WordPress",
@@ -7,8 +26,8 @@
     "phpcs.autoConfigSearch": true,
     // PHPCBF.
     "phpcbf.enable": true,
+    "phpcbf.onsave": true,
     "phpcbf.executablePath": "/usr/local/bin/phpcbf",
     "phpcbf.standard": "WordPress",
     "phpcbf.documentFormattingProvider": true,
-    "phpcbf.onsave": true,
 }
