@@ -15,8 +15,9 @@
 			"extensions": [
 				"xdebug.php-debug",
 				"xdebug.php-pack",
-				"shevaua.phpcs",
-				"persoderlind.vscode-phpcbf",
+				"wongjn.php-sniffer",
+				// "shevaua.phpcs",
+				// "persoderlind.vscode-phpcbf",
 				"bmewburn.vscode-intelephense-client",
 				"christian-kohler.path-intellisense",
 				"neilbrayfield.php-docblocker",
