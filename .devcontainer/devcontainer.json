@@ -8,16 +8,14 @@
 	],
 	"dockerComposeFile": "docker-compose.yml",
 	"remoteUser": "www-data",
-	"workspaceFolder": "/var/www/html/",
 	"postCreateCommand": "${containerWorkspaceFolder}/.devcontainer/setup.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				// You can add new "required" extensions to add to your VSCode on build. 
 				"xdebug.php-debug",
 				"xdebug.php-pack",
 				"wongjn.php-sniffer",
-				// "shevaua.phpcs",
-				// "persoderlind.vscode-phpcbf",
 				"bmewburn.vscode-intelephense-client",
 				"christian-kohler.path-intellisense",
 				"neilbrayfield.php-docblocker",

@@ -12,17 +12,17 @@ exec 1>"$SETUP_PATH"/logs/setup.log 2>&1
 # Visual Studio Code - Readjust launch.json based on .env property
 sed -i 's|__WORDPRESS_DEV_ITEM_PATH__|'"$WORDPRESS_DEV_ITEM_PATH"'|' "$SETUP_PATH"/../.vscode/launch.json
 
-# NodeJS Tooling - Install dependencies and other stuff for blocks if using wp-scripts
-# echo "Installing NodeJS dependencies.."
-# Ref: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/
-# cd /var/www/html${WORDPRESS_DEV_ITEM_PATH}
-# npm i && npm run build
-
 # PHP Tooling - WordPress Coding Standards
 echo "Installing WordPress Coding Standards..."
 git clone -b master https://github.com/WordPress/WordPress-Coding-Standards.git /var/www/.wpcs
 sudo phpcs --config-set installed_paths /var/www/.wpcs/
 sudo phpcs --config-set default_standard WordPress
+
+# NodeJS Tooling - Install dependencies and other stuff for blocks if using wp-scripts
+# echo "Installing NodeJS dependencies.."
+# Ref: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/
+# cd /var/www/html${WORDPRESS_DEV_ITEM_PATH}
+# npm i && npm run build
 
 # Wait to DB to be ready (maybe it's not needed but just to be sure).
 echo "Waiting for DB image to be ready..."
@@ -56,7 +56,7 @@ wp core install \
     --skip-email
 
 # WordPress - Install WordPress and activate plugins/themes.
-# wp plugin install wp-super-cache --activate # To install and activate plugin repository
-# wp theme install wp-super-cache --activate # To install and activate plugin repository
+# wp plugin install SLUG-OF-PLUGIN-WP-REPO --activate # To install and activate plugin repository
 # wp plugin activate $SLUG # To activate custom made theme
+# wp theme install SLUG-OF-THEME-WP-REPO --activate # To install and activate plugin repository
 # wp theme activate $SLUG # To activate custom made theme
